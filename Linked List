@@ -1,0 +1,100 @@
+class Main{
+    Node head;
+    int length;
+    
+    Main(){
+        this.length = 0;
+    }
+    
+    class Node{
+        int data;
+        Node next;
+        
+        Node(int data){
+        this.data = data;
+        this.next = null;
+        }
+    }
+    
+    public void addFirst(int data){
+        Node newNode = new Node(data);
+        length++;
+        if(head ==  null){
+            head = newNode;
+            return;
+        }
+        
+        newNode.next = head;
+        head = newNode;
+    }
+    
+    public void addLast(int data){
+        Node newNode = new Node(data);
+        Node currNode = head;
+        length++;
+        if(head == null){
+            head = newNode;
+            return;
+        }
+        
+        while(currNode.next!=null){
+            currNode = currNode.next;
+        }
+        currNode.next = newNode;
+    }
+    
+    public void deleteFirst(){
+        if(head == null){
+            System.out.print("Empty LL");
+            return;
+        }
+        else{
+            head = head.next;
+            length--;
+        }
+    }
+    
+    public void deleteLast(){
+        Node currNode = head;
+        if(head == null){
+            System.out.print("Empty LL");
+            return;
+        }
+        while(currNode.next.next!=null){
+            currNode = currNode.next;
+        }
+        currNode.next = null;
+        length--;
+    }
+    
+    public int checkLength(){
+        return length;
+    }
+    
+    public void printLL(){
+        Node currNode = head;
+        if(head == null){
+            System.out.print("Empty LL");
+            return;
+        }
+        else{
+            while(currNode!=null){
+                System.out.print(currNode.data+"->");
+                currNode = currNode.next;
+            }
+        }
+        System.out.print("NULL");
+        System.out.println();
+    }
+    
+    public static void main(String args[]){
+        Main linked = new Main();
+        linked.addLast(2);
+        linked.addFirst(1);
+        linked.addLast(3);
+        // linked.deleteFirst();
+        linked.deleteLast();
+        linked.printLL();
+        System.out.print(linked.checkLength());
+    }
+}
