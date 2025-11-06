@@ -87,13 +87,82 @@ class Main{
         System.out.println();
     }
     
+    public void addAfter(int element, int nodeElement){
+        Node newNode = new Node(nodeElement);
+        Node currNode = head;
+        
+        if(head == null){
+            head = newNode;
+            return;
+        }
+        
+        while(currNode!=null){
+            if(currNode.data == element){
+                newNode.next = currNode.next;
+                currNode.next = newNode;
+                length++;
+                return;
+            }
+            currNode = currNode.next;
+        }
+    }
+    
+    public void insertAtPos(int pos, int newNodeElement){
+        Node newNode = new Node(newNodeElement);
+        Node currNode = head;
+        
+        if(pos<0 || pos>length){
+            System.out.print("Invalid position");
+            return;
+        }
+        
+        int count = 0;
+        if(pos==0){
+            newNode.next = head;
+            head = newNode;
+            length++;
+            return;
+        }
+        
+        while(count<pos-1){
+            currNode = currNode.next;
+            count++;
+        }
+        newNode.next = currNode.next;
+        currNode.next = newNode;
+        length++;
+        return;
+        
+    }
+    
+    public void deleteSpecificNode(int element){
+        Node currNode = head;
+        
+        if(head == null){
+            System.out.print("Empty LL");
+            return;
+        }
+        
+        while(currNode!=null){
+            if(currNode.next.data == element){
+                currNode.next = currNode.next.next;
+                length--;
+                return;
+            }
+            currNode = currNode.next;
+        }
+    }
+    
     public static void main(String args[]){
         Main linked = new Main();
         linked.addLast(2);
         linked.addFirst(1);
         linked.addLast(3);
         // linked.deleteFirst();
-        linked.deleteLast();
+        // linked.deleteLast();
+        // linked.addAfter(2,0);
+        // linked.insertAtPos(0,0);
+        linked.deleteSpecificNode(2);
         linked.printLL();
         System.out.print(linked.checkLength());
     }
