@@ -5,12 +5,14 @@ class Solution {
 
     private String stringBuilder(String str){
         StringBuilder sb = new StringBuilder();
+        Stack<Character> st = new Stack<>();
         int counter = 0;
         for(Character ch : str.toCharArray()){
             if(ch=='('){
                 if(counter>0){
                     counter++;
-                    sb.append(ch);
+                    st.push(ch);
+                    sb.append(st.pop());
                 }
                 else{
                     counter++;
@@ -19,7 +21,8 @@ class Solution {
             else if(ch == ')'){
                 if(counter>1){
                     counter--;
-                    sb.append(ch);
+                    st.push(ch);
+                    sb.append(st.pop());
                 }
                 else{
                     counter--;
