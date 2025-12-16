@@ -1,22 +1,27 @@
 class Solution {
     public int thirdMax(int[] nums) {
-        HashSet<Integer> set = new HashSet<>();
-        for(int i : nums){
-            set.add(i);
-        }
+        long first = Long.MIN_VALUE;
+        long second = Long.MIN_VALUE;
+        long third = Long.MIN_VALUE;
+        
+        for(int num : nums){
+            if(first == num || second == num || third == num){
+                continue;
+            }
 
-        List<Integer> list = new ArrayList<>(set);
-        Collections.sort(list, Collections.reverseOrder());
-        int result;
-        if(list.size()==0){
-            return 0;
+            if(num>first){
+                third = second;
+                second = first;
+                first = num;
+            }
+            else if(num>second){
+                third = second;
+                second = num;
+            }
+            else if(num>third){
+                third = num;
+            }
         }
-        else if(list.size() < 3){
-            result = list.get(0);
-        }
-        else{
-            result = list.get(2);
-        }
-        return result;
+        return third==Long.MIN_VALUE? (int)first:(int)third;   
     }
 }
